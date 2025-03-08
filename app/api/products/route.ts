@@ -13,3 +13,17 @@ export async function GET(req:NextRequest) {
       return NextResponse.json({success: false, error: message})
    }
 }
+
+export async function POST(req:NextRequest) {
+   await connectDB();
+   const body = await req.json();
+
+   try {
+      const newProduct = await Product.create({...body});
+
+      return NextResponse.json({success: true, newProduct})
+   } catch ({message}) {
+      return NextResponse.json({success: false, error: message})
+   }
+   
+}
