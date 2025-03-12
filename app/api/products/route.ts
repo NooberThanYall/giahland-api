@@ -8,7 +8,7 @@ export async function GET(req:NextRequest) {
    try {
       const products = await Product.find({});
 
-      return NextResponse.json({success: true, products})
+      return NextResponse.json({ , products})
    } catch ({message}) {
       return NextResponse.json({success: false, error: message})
    }
@@ -21,9 +21,22 @@ export async function POST(req:NextRequest) {
    try {
       const newProduct = await Product.create({...body});
 
-      return NextResponse.json({success: true, newProduct})
+      return NextResponse.json({newProduct})
    } catch ({message}) {
       return NextResponse.json({success: false, error: message})
    }
    
+}
+
+export async function DELETE(req:NextRequest) {
+   await connectDB();
+
+   try {
+      const deleted = await Product.deleteMany({});
+
+
+      return NextResponse.json({ })
+   } catch ({message}) {
+      return NextResponse.json({success: false, error: message})
+   }
 }

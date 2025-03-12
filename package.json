@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "jose": "^6.0.8",
+    "kavenegar": "^1.1.4",
     "mongoose": "^8.12.1",
     "next": "14.2.20",
     "react": "^18",

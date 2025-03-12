@@ -16,7 +16,7 @@ export async function POST(req:NextRequest) {
       const newUser = await User.create({...body});
 
       const verifiedUser = await encrypt({...newUser, password: null})
-      return NextResponse.json({success: true, token: verifiedUser})
+      return NextResponse.json({ token: verifiedUser})
    } catch (error) {
       return NextResponse.json({success: false, error: error.message})
    }

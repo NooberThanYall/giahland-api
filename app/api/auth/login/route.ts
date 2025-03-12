@@ -10,11 +10,11 @@ export async function POST(req:NextRequest) {
    try {
       const userAlrExists = await User.findOne({email: body.email});
 
-      if(!userAlrExists) throw new Error('کاربری با این ایمیل وجود دارد')
+      if(!userAlrExists) throw new Error('کاربری با این ایمیل وجود دارد');
       
       const verifiedUser = await encrypt({...userAlrExists, password: null})
 
-      return NextResponse.json({success: true, token: verifiedUser})
+      return NextResponse.json({ token: verifiedUser})
 
    } catch (error) {
       return NextResponse.json({success: false, error: error.message})
