@@ -8,7 +8,7 @@ export async function GET(req:NextRequest) {
    try {
       const products = await Product.find({});
 
-      return NextResponse.json({ , products})
+      return NextResponse.json({ products})
    } catch ({message}) {
       return NextResponse.json({success: false, error: message})
    }
