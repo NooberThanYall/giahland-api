@@ -33,7 +33,7 @@ export async function DELETE(req:NextRequest) {
 
    try {
       const deleted = await Product.deleteMany({});
-
+      console.log(deleted)
 
       return NextResponse.json({ })
    } catch ({message}) {
