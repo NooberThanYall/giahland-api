@@ -6,8 +6,7 @@ const userSchema = new Schema({
     email: String,
     password: String,
     phone: Number,
-    isPhoneVerified: Boolean,
-    phoneVerificationCode: Number,
+    isAdmin: Boolean
 }, {
    timestamps: true
 })
