@@ -3,20 +3,23 @@ import { encrypt } from "@/app/utils/jwt";
 import connectDB from "@/app/utils/mongodb";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req:NextRequest) {
-   await connectDB();
-   const body = await req.json();
+export async function POST(req: NextRequest) {
+  await connectDB();
+  const body = await req.json();
 
-   try {
-      const userAlrExists = await User.findOne({email: body.email});
+  try {
+    const userAlrExists = await User.findOne({ phone: body.phone });
 
-      if(!userAlrExists) throw new Error('کاربری با این ایمیل وجود دارد');
-      
-      const verifiedUser = await encrypt({...userAlrExists, password: null})
+    if (!userAlrExists) throw new Error("کاربری با این شماره وجود ندارد");
 
-      return NextResponse.json({ token: verifiedUser})
+    if (userAlrExists.password === body.password) {
+      const verifiedUser = await encrypt({ ...userAlrExists, password: null });
 
-   } catch (error) {
-      return NextResponse.json({success: false, error: error.message})
-   }
+      return NextResponse.json({ token: verifiedUser });
+    } else {
+      throw new Error("پسورد غلط");
+    }
+  } catch (error) {
+    return NextResponse.json({ success: false, error: error.message });
+  }
 }
