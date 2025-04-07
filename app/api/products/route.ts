@@ -6,6 +6,7 @@ export async function GET(req:NextRequest) {
    await connectDB();
 
    try {
+      console.log('HI FROM GET')
       const products = await Product.find({});
 
       return NextResponse.json({ products})
